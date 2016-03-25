@@ -72,6 +72,24 @@
         });
     };
 
+    var updateOpposite = function(text){
+        $oppositeList = $("#oppositeValue");
+        updateValue("/api/noun_phrases", text, $oppositeList, function(res){
+            $oppositeList.empty();
+            var oppositePhrases = res.result;
+            if (!text) {
+                $oppositeList.append("No text.");
+            }
+            else if (oppositePhrases.length <= 0){
+                $oppositeList.append("<em>None found.</em>");
+            } else{
+                oppositePhrases.forEach(function(elem, index) {
+                    $oppositeList.append("<li>" + elem + "</li>");
+                });
+            }
+        });
+    };
+
     var updateSentiment = function(text){
         $sentValue = $("#sentimentValue");
         $("#sentencesSentiment").hide();
@@ -95,6 +113,7 @@
             var text = $("textarea[name='text']")[0].value;
             updateSentiment(text);
             updateNounPhrases(text);
+            updateOpposite(text);
         }, 250);
     });
 

@@ -1,7 +1,12 @@
 #!/usr/bin/env python
 from flask import Flask, jsonify, request, render_template, abort
-from text.blob import TextBlob
-from text.utils import strip_punc
+from textblob import TextBlob, Word, Blobber
+from textblob.classifiers import NaiveBayesClassifier
+from textblob.taggers import NLTKTagger
+#from textutils import strip_punc
+from textblob.utils import strip_punc
+from textblob import Word
+from textblob.wordnet import VERB
 
 app = Flask(__name__)
 
